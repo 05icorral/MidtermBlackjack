@@ -1,0 +1,29 @@
+import java.util.*;
+
+public class Deck {
+    private final List<Card> cards = new ArrayList<>();
+
+    public Deck() {
+        resetAndShuffle();
+    }
+
+    public final void resetAndShuffle() {
+        cards.clear();
+        String[] suits = {"Clubs", "Diamonds", "Hearts", "Spades"};
+        String[] ranks = {"2","3","4","5","6","7","8","9","10","J","Q","K","A"};
+        int[] values   = {2,3,4,5,6,7,8,9,10,10,10,10,11};
+
+        for (String suit : suits) {
+            for (int i = 0; i < ranks.length; i++) {
+                cards.add(new Card(suit, ranks[i], values[i]));
+            }
+        }
+
+        Collections.shuffle(cards, new Random());
+    }
+
+    public Card dealCard() {
+        if (cards.isEmpty()) resetAndShuffle();
+        return cards.remove(0);  // ✅ remove the first card
+    }
+}  // ✅ closes the class
